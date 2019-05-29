@@ -1,0 +1,45 @@
+<h3> An introduction to GNU screen. </h3>
+
+GNU screen (or just screen) is a usefule and versatile, but somewhat under-appreciated utility that, as part of the GNU project, is included or available in nearly every Linux or Unix distribution.   Screen is a terminal multiplexer, similar to what you would find in a window manager in Xwindow.  It is an especially helpful utility if you are restricted to working on a computer or a VM either over an SSH link or through a TTY session on the console.
+Two of the features that I find most useful are the ability to open multiple windows within the screen session, and the ability to disconnect and reconnect screen without losing the current session. Screen is started simply with the <code>screen</code> command.
+
+<h3> Screen Basics </h3>
+
+First, a little bit about how to control screen.  Screen works with a control sequence, [ctrl-a].  All characters typed in a screen session are sent directly to the shell, with the exception of [ctrl-a].  [ctrl-a] followed by a character is how you send command sequences to screen.  For example [ctrl-a] ? brings up the help page with the default key bindings.
+
+Screen allows you to create multiple windows within your single terminal session.  Typing [ctrl-a] c starts a new windows within screen.  This acts like an independent window with its own shell. [ctrl-a] K will kill the current window.  
+
+[ctrl-a] n and [ctrl-a] p will move to the next and previous screens respectively.  Alternately, [ctrl-a] # switches between screen sessions by number, in the order that they were started in.  There is also a command that displays a list of all the current windows, and allows for selection with the cursor keys, [ctrl-a] ".
+
+One of the most powerful features of screen is the ability to disconnect and reconnect your screen sessions.  This can be most useful when you are on an unreliable connection, or if you know you'll be moving from one network to another, or one computer to another.  [ctrl-a] d disconnects your screen session.  You can then log out of your ssh session.  When you want to continue, log in again and start screen with the -r (for resume) option.  <code>screen -r</code>  Your screen session will resume from where you left off, with all processes running as you left them.  If your session were to disconnect abruptly, you can similarly reconnect with the same command.  If the host has not acknowledged that your session has disconnected, you can use the <code>screen -r -d</code> for resume and disconnect to allow screen to disconnect the session, and reconnect.  This can be a lifesaver if your network connection is unreliable.
+
+<h3> Installing screen </h3>
+
+Screen is installed by default on some distributions, such as SuSE and Slackware.
+
+On all of the linux distributions that I tried it on, I was able to use the standard package manager to install screen.
+
+For example:  Under Redhat and Fedora , I was able to use "yum install screen" or "dnf install screen" as root.
+
+Under Debian and derivatives like Ubuntu, I used "sudo apt-get install screen".
+
+I was able to install screen using ports on FreeBSD as well.
+
+<h3> More advanced screen features </h3>
+
+Screen sessions can be split.  A horizontal screen split is done with [ctrl-a] S.  This will split your current window in half horizontally.  Switching between the regions is done with [ctrl-a] tab.  The other window switching commands work within a split screen.  A split window can be eliminated with [ctrl-a] X.  In more recent versions of screen, a horizontal split can be created with [ctrl-a] |. (the pipe symbol)  
+
+Log files of current screen sessions can be started with the [ctrl-a] H command, which will make a file called screenlog.X where X is the number of your screen session.  A screenshot of what is currently in your screen window can be invoked with [ctrl-a] h, creating a file called hardcopy.X.
+
+A screen session can be locked with the [ctrl-a] x command which will lock the screen with the current user's password.
+
+<H3>Why GNU screen? </H3>
+A question that I am frequently asked is "Why use screen instead of something newer like tmux?"  My answer is simple, screen is easy to use, and ubiquitous.  It was already installed on the servers that I work on, and does the jobs I need perfectly.  If there was a deficiency that needed to be addressed, I'd quickly look for a better tool, but screen does the job I need it to.
+
+Hopefully you'll find GNU screen as useful as I do, and take advantage of this frequently overlooked utility.
+
+<H3> References </H3>
+
+GNU screen manual pages			https://www.gnu.org/software/screen/manual/screen.html
+Aperiodic screen quick reference	http://aperiodic.net/screen/quick_reference
+
